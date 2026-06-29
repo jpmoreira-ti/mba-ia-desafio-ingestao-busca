@@ -1,3 +1,14 @@
+import os
+from dotenv import load_dotenv
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI 
+from langchain_postgres import PGVector
+from langchain_core.prompts import PromptTemplate 
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+COLLECTION_NAME = os.getenv("PG_VECTOR_COLLECTION_NAME")
+
 PROMPT_TEMPLATE = """
 CONTEXTO:
 {contexto}
@@ -25,5 +36,34 @@ PERGUNTA DO USUÁRIO:
 RESPONDA A "PERGUNTA DO USUÁRIO"
 """
 
+
 def search_prompt(question=None):
-    pass
+  try:
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+
+    vector_store = PGVector(
+      connection=DATABASE_URL,
+      embeddings=embeddings,
+      collection_name=COLLECTION_NAME
+    )
+
+    docs = vector_store.similarity_search(question, k=10)
+    contexto = "\n\n".join([doc.page_content for doc in docs])
+
+    prompt_template = PromptTemplate(
+      input_variables=["contexto", "pergunta"],
+      template=PROMPT_TEMPLATE
+    )
+
+    prompt_filled = prompt_template.format(
+      contexto=contexto,
+      pergunta=question
+    )
+
+    llm = ChatOpenAI(model="gpt-5-nano", temperature=0)
+    response_llm = llm.invoke(prompt_filled)
+    return response_llm.content
+
+  except Exception as e:
+    print(f"Erro ao processar pergunta: {str(e)}")
+    return None
