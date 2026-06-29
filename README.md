@@ -62,25 +62,20 @@ pip install -r requirements.txt
 ```
 
 ### 3. Configurar Variáveis de Ambiente
+
+Copie o arquivo `.env.example` para `.env`:
+
 ```bash
 cp .env.example .env
 ```
 
 Preencha o `.env` com suas chaves:
-```env
-# Google (opcional)
-GOOGLE_API_KEY=sua_google_api_key
-GOOGLE_EMBEDDING_MODEL=models/embedding-001
+- **OPENAI_API_KEY** ou **GOOGLE_API_KEY**: Sua chave da API (OpenAI ou Google)
+- **DATABASE_URL**: URL de conexão ao PostgreSQL (padrão para Docker: `postgresql://postgres:postgres@localhost:5432/rag`)
+- **PG_VECTOR_COLLECTION_NAME**: Nome da collection (exemplo: `pdf_documents`)
+- **PDF_PATH**: Caminho do arquivo PDF (exemplo: `document.pdf`)
 
-# OpenAI (opcional)
-OPENAI_API_KEY=sua_openai_api_key
-OPENAI_EMBEDDING_MODEL=text-embedding-3-small
-
-# Banco de dados
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/rag
-PG_VECTOR_COLLECTION_NAME=pdf_documents
-PDF_PATH=document.pdf
-```
+Veja `.env.example` para a estrutura completa.
 
 ### 4. Subir o Banco de Dados
 ```bash

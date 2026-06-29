@@ -36,7 +36,6 @@ PERGUNTA DO USUÁRIO:
 RESPONDA A "PERGUNTA DO USUÁRIO"
 """
 
-
 def search_prompt(question=None):
   try:
     embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
@@ -65,5 +64,5 @@ def search_prompt(question=None):
     return response_llm.content
 
   except Exception as e:
-    print(f"Erro ao processar pergunta: {str(e)}")
+    print(f"Erro ao processar a pergunta: {str(e)}")
     return None
