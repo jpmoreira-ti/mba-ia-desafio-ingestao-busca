@@ -26,7 +26,7 @@ Sistema de ingestão e busca semântica que permite:
 
 ### APIs
 - Pode usar:
-  - **OpenAI API Key** (para usar `text-embedding-3-small` e `gpt-4-nano`)
+  - **OpenAI API Key** (para usar `text-embedding-3-small` e `gpt-5-nano`)
   - **Google Gemini API Key** (para usar `embedding-001` e `gemini-2.5-flash-lite`)
 
 ---
