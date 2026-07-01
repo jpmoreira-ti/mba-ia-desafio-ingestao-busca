@@ -37,6 +37,8 @@ RESPONDA A "PERGUNTA DO USUÁRIO"
 """
 
 def search_prompt(question=None):
+  LLM = "gpt-5-nano"
+
   try:
     embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
@@ -59,7 +61,7 @@ def search_prompt(question=None):
       pergunta=question
     )
 
-    llm = ChatOpenAI(model="gpt-5-nano", temperature=0)
+    llm = ChatOpenAI(model=LLM, temperature=0)
     response_llm = llm.invoke(prompt_filled)
     return response_llm.content
 

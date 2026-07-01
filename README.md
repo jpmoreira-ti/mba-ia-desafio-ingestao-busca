@@ -105,7 +105,7 @@ Aplicação pronta para receber perguntas
 ## 💬 Exemplo de Uso
 
 ```
-Faça sua pergunta (ou 'sair' para encerrar):
+Faça sua pergunta (ou digite 'sair' para encerrar):
 
 PERGUNTA: Qual o faturamento da Empresa SuperTechIABrazil?
 RESPOSTA: O faturamento foi de 10 milhões de reais.
